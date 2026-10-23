@@ -18,12 +18,13 @@ RUN git clone --depth 1 --branch 2.3.7 https://github.com/EvolutionAPI/evolution
 # Instala dependências
 RUN npm install
 
-# Define o provider
-ENV DATABASE_PROVIDER=postgresql
+# Cria um .env mínimo só para o Prisma gerar o schema
+RUN echo "DATABASE_PROVIDER=postgresql" > .env && \
+    echo "DATABASE_CONNECTION_URI=postgresql://user:pass@localhost:5432/evolution" >> .env
 
-# Gera o schema do Prisma (script oficial)
+# Gera o schema do Prisma
 RUN chmod +x ./Docker/scripts/*.sh || true
-RUN ./Docker/scripts/generate_database.sh || true
+RUN ./Docker/scripts/generate_database.sh
 
 # Gera o client do Prisma
 RUN npx prisma generate
