@@ -1,3 +1,3 @@
-FROM evolutionapi/evolution-api:v1.8.2
+FROM evolutionapi/evolution-api:latest
 EXPOSE 8080
 CMD ["npm", "start"]
