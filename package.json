@@ -1,7 +1,0 @@
-{
-  "name": "evolution-api-barbearia",
-  "version": "1.0.0",
-  "scripts": {
-    "start": "npx -y evolution-api@latest"
-  }
-}
