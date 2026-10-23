@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: evolution-api-sofia
+    env: docker
+    image:
+      url: docker.io/evolutionapi/evolution-api:v1.8.2
+    plan: free
+    envVars:
+      - key: AUTHENTICATION_API_KEY
+        value: MinhaChaveSuperSegura123
+      - key: DATABASE_ENABLED
+        value: "false"
