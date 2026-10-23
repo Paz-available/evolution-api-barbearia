@@ -1,6 +1,5 @@
 FROM node:20-alpine
 
-# Dependências do sistema necessárias
 RUN apk update && apk add --no-cache \
     git \
     ffmpeg \
@@ -13,18 +12,19 @@ RUN apk update && apk add --no-cache \
 
 WORKDIR /evolution
 
-# Clona a versão estável da Evolution API
+# Clona a versão estável
 RUN git clone --depth 1 --branch 2.3.7 https://github.com/EvolutionAPI/evolution-api.git .
 
-# Instala dependências
-RUN npm ci --omit=dev
+# Instala todas as dependências (incluindo as de build)
+RUN npm install
 
 # Gera o Prisma Client e faz o build
 RUN npx prisma generate || true
 RUN npm run build
 
-# Porta que a Evolution usa
+# Remove dependências de desenvolvimento para deixar a imagem menor
+RUN npm prune --omit=dev
+
 EXPOSE 8080
 
-# Comando de start
 CMD ["npm", "run", "start:prod"]
