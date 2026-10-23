@@ -14,7 +14,7 @@ RUN apk update && apk add --no-cache \
 WORKDIR /evolution
 
 # Clona a versão estável da Evolution API
-RUN git clone --depth 1 --branch v2.2.3 https://github.com/EvolutionAPI/evolution-api.git .
+RUN git clone --depth 1 --branch 2.3.7 https://github.com/EvolutionAPI/evolution-api.git .
 
 # Instala dependências
 RUN npm ci --omit=dev
