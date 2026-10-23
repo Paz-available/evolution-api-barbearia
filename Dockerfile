@@ -15,14 +15,20 @@ WORKDIR /evolution
 # Clona a versão estável
 RUN git clone --depth 1 --branch 2.3.7 https://github.com/EvolutionAPI/evolution-api.git .
 
-# Instala todas as dependências (incluindo as de build)
+# Instala dependências
 RUN npm install
 
-# Gera o Prisma Client e faz o build
-RUN npx prisma generate || true
+# Define o provider do banco (mesmo que não vamos usar banco agora)
+ENV DATABASE_PROVIDER=postgresql
+
+# Gera o schema e o client do Prisma
+RUN node runWithProvider.js generate
+RUN npx prisma generate
+
+# Faz o build
 RUN npm run build
 
-# Remove dependências de desenvolvimento para deixar a imagem menor
+# Remove dependências de desenvolvimento
 RUN npm prune --omit=dev
 
 EXPOSE 8080
