@@ -1,7 +1,7 @@
 services:
   - type: web
     name: evolution-api-sofia
-    env: docker
+    env: image
     image:
       url: docker.io/evolutionapi/evolution-api:v1.8.2
     plan: free
