@@ -3,7 +3,7 @@ services:
     name: evolution-api-sofia
     env: image
     image:
-      url: docker.io/evolutionapi/evolution-api:v1.8.2
+      url: docker.io/evolutionapi/evolution-api:1.8.2
     plan: free
     envVars:
       - key: AUTHENTICATION_API_KEY
