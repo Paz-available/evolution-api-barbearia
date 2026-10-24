@@ -34,5 +34,5 @@ RUN npm prune --omit=dev
 
 EXPOSE 8080
 
-# Roda a migração e depois inicia a API
-CMD ["sh", "-c", "npx prisma db push --accept-data-loss && npm run start:prod"]
+# Roda a migração apontando para o schema correto e depois inicia a API
+CMD ["sh", "-c", "npx prisma db push --schema=./prisma/postgresql-schema.prisma --accept-data-loss && npm run start:prod"]
